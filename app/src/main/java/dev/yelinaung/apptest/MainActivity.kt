@@ -1,52 +1,44 @@
 package dev.yelinaung.apptest
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvGreeting.text = "Hi"
+        supportActionBar?.title = "Main Menu"
 
-        Log.d("TAG", "onCreate")
+        binding.btnLifecycle.setOnClickListener {
+            this.goToLifecycleScreen()
+        }
+
+        binding.btnBroadcast.setOnClickListener {
+            this.goToBroadcastScreen()
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("TAG", "onStart")
+    private fun goToLifecycleScreen() {
+        val intent = Intent(this, LifecycleActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("TAG", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("TAG", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("TAG", "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("TAG", "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("TAG", "onDestroy")
+    private fun goToBroadcastScreen() {
+        val intent = Intent(this, BroadcastActivity::class.java)
+        startActivity(intent)
     }
 
 }
