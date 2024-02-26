@@ -2,13 +2,10 @@ package dev.yelinaung.apptest
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
-import java.util.Date
+import dev.yelinaung.apptest.lifecycle.LifecycleActivity
 
 class MainActivity : AppCompatActivity() {
 

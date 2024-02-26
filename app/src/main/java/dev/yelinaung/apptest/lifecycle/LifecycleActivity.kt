@@ -1,4 +1,4 @@
-package dev.yelinaung.apptest
+package dev.yelinaung.apptest.lifecycle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
