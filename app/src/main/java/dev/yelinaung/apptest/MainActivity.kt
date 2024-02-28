@@ -1,14 +1,11 @@
 package dev.yelinaung.apptest
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
 import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
+import java.util.Date
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -29,6 +26,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnBroadcast.setOnClickListener {
             this.goToBroadcastScreen()
         }
+
+        binding.btnIntent.setOnClickListener {
+            this.goToIntentActivity()
+        }
     }
 
     private fun goToLifecycleScreen() {
@@ -38,6 +39,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToBroadcastScreen() {
         val intent = BroadcastActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToIntentActivity() {
+        val intent = IntentActivity.getInstance(this, Date().toString())
         startActivity(intent)
     }
 

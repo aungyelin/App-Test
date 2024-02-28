@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityBroadcastBinding
 
-
 class BroadcastActivity : BaseActivity<ActivityBroadcastBinding>() {
 
     companion object {
