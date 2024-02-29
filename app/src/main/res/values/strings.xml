@@ -6,4 +6,10 @@
     <string name="intent">Intent</string>
 
     <string name="button_send_custom_broadcast">Send Custom Broadcast</string>
+    <string name="button_open_link_in_browser">Open Link in Browser</string>
+    <string name="button_call_phone">Call Phone</string>
+    <string name="button_share_content">Share Content</string>
+    <string name="button_open_in_map_view">Open in Map View</string>
+    <string name="button_take_picture">Take Picture</string>
+    <string name="button_pick_image_from_gallary">Pick Image from Gallary</string>
 </resources>
