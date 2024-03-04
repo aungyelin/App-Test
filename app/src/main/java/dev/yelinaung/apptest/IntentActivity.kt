@@ -5,9 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import dev.yelinaung.apptest.databinding.ActivityIntentBinding
-
 
 class IntentActivity : BaseActivity<ActivityIntentBinding>() {
 
@@ -29,16 +29,25 @@ class IntentActivity : BaseActivity<ActivityIntentBinding>() {
         return ActivityIntentBinding.inflate(layoutInflater)
     }
 
-    private val fileChooserContract =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let { binding.imageView.setImageURI(it) }
+    private var imageUri: Uri? = null
+
+    private val fileChooserContract = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            imageUri = it
+            binding.btnShareContent.visibility = View.VISIBLE
+            binding.imageView.setImageURI(imageUri)
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val message = intent.getStringExtra(MESSAGE)
         binding.tvMessage.text = message
+
+        binding.btnShareContent.visibility = View.GONE
 
         binding.btnOpenLink.setOnClickListener { this.openLink() }
         binding.btnPhoneCall.setOnClickListener { this.callPhoneNumber() }
@@ -58,7 +67,12 @@ class IntentActivity : BaseActivity<ActivityIntentBinding>() {
     }
 
     private fun shareContent() {
-
+        this.imageUri?.let {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.setType("image/*")
+            intent.putExtra(Intent.EXTRA_STREAM, it)
+            startActivity(intent)
+        }
     }
 
     private fun openMap() {
