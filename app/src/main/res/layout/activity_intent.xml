@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntentActivity">
+    tools:context=".intent.IntentActivity">
 
     <TextView
         android:id="@+id/tvMessage"
@@ -57,7 +57,7 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="5dp"
-        android:text="@string/button_pick_image_from_gallary"
+        android:text="@string/button_pick_image_from_gallery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnOpenMap" />

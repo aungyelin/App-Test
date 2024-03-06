@@ -4,6 +4,7 @@
     <string name="broadcast_receiver">Broadcast Receiver</string>
     <string name="activity_lifecycle">Activity Lifecycle</string>
     <string name="intent">Intent</string>
+    <string name="task_and_back_stack">Task and Back Stack</string>
 
     <string name="button_send_custom_broadcast">Send Custom Broadcast</string>
     <string name="button_open_link_in_browser">Open Link in Browser</string>
@@ -11,5 +12,7 @@
     <string name="button_share_content">Share Content</string>
     <string name="button_open_in_map_view">Open in Map View</string>
     <string name="button_take_picture">Take Picture</string>
-    <string name="button_pick_image_from_gallary">Pick Image from Gallary</string>
+    <string name="button_pick_image_from_gallery">Pick Image from Gallery</string>
+    <string name="button_go_to_activity_one">Go to Activity One</string>
+    <string name="button_go_to_activity_two">Go to Activity Two</string>
 </resources>

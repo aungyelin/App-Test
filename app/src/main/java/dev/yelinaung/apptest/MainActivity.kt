@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
+import dev.yelinaung.apptest.intent.IntentActivity
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
+import dev.yelinaung.apptest.taskandbackstack.TaskAndBackStackActivity
 import java.util.Date
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -30,6 +32,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnIntent.setOnClickListener {
             this.goToIntentActivity()
         }
+
+        binding.btnTaskAndBackStack.setOnClickListener {
+            this.goToTaskAndBackStackActivity()
+        }
     }
 
     private fun goToLifecycleScreen() {
@@ -44,6 +50,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToIntentActivity() {
         val intent = IntentActivity.getInstance(this, Date().toString())
+        startActivity(intent)
+    }
+
+    private fun goToTaskAndBackStackActivity() {
+        val intent = TaskAndBackStackActivity.getInstance(this)
         startActivity(intent)
     }
 

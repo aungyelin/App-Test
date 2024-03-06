@@ -1,4 +1,4 @@
-package dev.yelinaung.apptest
+package dev.yelinaung.apptest.intent
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityIntentBinding
 
 class IntentActivity : BaseActivity<ActivityIntentBinding>() {
