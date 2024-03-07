@@ -13,6 +13,8 @@
     <string name="button_open_in_map_view">Open in Map View</string>
     <string name="button_take_picture">Take Picture</string>
     <string name="button_pick_image_from_gallery">Pick Image from Gallery</string>
-    <string name="button_go_to_activity_one">Go to Activity One</string>
-    <string name="button_go_to_activity_two">Go to Activity Two</string>
+    <string name="button_go_to_activity_one">Activity One (Single Top)</string>
+    <string name="button_go_to_activity_two">Activity Two (Default)</string>
+    <string name="button_activity_three_single_task">Activity Three (Single Task)</string>
+    <string name="button_activity_four_single_instance">Activity Four (Single Instance)</string>
 </resources>

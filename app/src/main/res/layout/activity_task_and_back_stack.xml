@@ -23,4 +23,20 @@
         android:layout_marginTop="5dp"
         android:text="@string/button_go_to_activity_two" />
 
+    <Button
+        android:id="@+id/buttonActivityThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/button_activity_three_single_task" />
+
+    <Button
+        android:id="@+id/buttonActivityFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/button_activity_four_single_instance" />
+
 </LinearLayout>

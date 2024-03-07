@@ -1,7 +1,9 @@
 package dev.yelinaung.apptest.taskandbackstack
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +16,7 @@ import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityOneBinding
 
-class OneActivity : BaseActivity<ActivityOneBinding>() {
+class OneActivity : BaseTaskAndBackStackActivity<ActivityOneBinding>() {
 
     companion object {
 
@@ -40,21 +42,14 @@ class OneActivity : BaseActivity<ActivityOneBinding>() {
         binding.buttonActivityTwo.setOnClickListener {
             this.goToActivityTwo()
         }
-    }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        Toast.makeText(this, "onNewIntent", Toast.LENGTH_LONG).show()
-    }
+        binding.buttonActivityThree.setOnClickListener {
+            this.goToActivityThree()
+        }
 
-    private fun goToActivityOne() {
-        val intent = getInstance(this)
-        startActivity(intent)
-    }
-
-    private fun goToActivityTwo() {
-        val intent = TwoActivity.getInstance(this)
-        startActivity(intent)
+        binding.buttonActivityFour.setOnClickListener {
+            this.goToActivityFour()
+        }
     }
 
 }

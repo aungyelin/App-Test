@@ -14,23 +14,24 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.R
-import dev.yelinaung.apptest.databinding.ActivityTwoBinding
+import dev.yelinaung.apptest.databinding.ActivityThreeBinding
 
-class TwoActivity : BaseTaskAndBackStackActivity<ActivityTwoBinding>() {
+class ThreeActivity : BaseTaskAndBackStackActivity<ActivityThreeBinding>() {
 
     companion object {
 
         fun getInstance(context: Context): Intent {
-            return Intent(context, TwoActivity::class.java)
+            return Intent(context, ThreeActivity::class.java)
         }
 
     }
 
-    override val pageTitle: String get() = "Activity Two"
+    override val pageTitle: String get() = "Activity Three"
 
-    override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityTwoBinding {
-        return ActivityTwoBinding.inflate(layoutInflater)
+    override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityThreeBinding {
+        return ActivityThreeBinding.inflate(layoutInflater)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

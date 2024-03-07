@@ -1,8 +1,11 @@
 package dev.yelinaung.apptest.taskandbackstack
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +16,7 @@ import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityTaskAndBackStackBinding
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
 
-class TaskAndBackStackActivity : BaseActivity<ActivityTaskAndBackStackBinding>() {
+class TaskAndBackStackActivity : BaseTaskAndBackStackActivity<ActivityTaskAndBackStackBinding>() {
 
     companion object {
 
@@ -39,16 +42,14 @@ class TaskAndBackStackActivity : BaseActivity<ActivityTaskAndBackStackBinding>()
         binding.buttonActivityTwo.setOnClickListener {
             this.goToActivityTwo()
         }
-    }
 
-    private fun goToActivityOne() {
-        val intent = OneActivity.getInstance(this)
-        startActivity(intent)
-    }
+        binding.buttonActivityThree.setOnClickListener {
+            this.goToActivityThree()
+        }
 
-    private fun goToActivityTwo() {
-        val intent = TwoActivity.getInstance(this)
-        startActivity(intent)
+        binding.buttonActivityFour.setOnClickListener {
+            this.goToActivityFour()
+        }
     }
 
 }

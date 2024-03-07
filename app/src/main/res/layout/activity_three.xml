@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".taskandbackstack.OneActivity">
+    tools:context=".taskandbackstack.ThreeActivity">
 
     <Button
         android:id="@+id/buttonActivityOne"
