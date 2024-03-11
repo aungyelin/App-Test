@@ -1,20 +1,10 @@
 package dev.yelinaung.apptest.taskandbackstack
 
-import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import dev.yelinaung.apptest.BaseActivity
-import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityTaskAndBackStackBinding
-import dev.yelinaung.apptest.lifecycle.LifecycleActivity
 
 class TaskAndBackStackActivity : BaseTaskAndBackStackActivity<ActivityTaskAndBackStackBinding>() {
 
@@ -35,21 +25,15 @@ class TaskAndBackStackActivity : BaseTaskAndBackStackActivity<ActivityTaskAndBac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.buttonActivityOne.setOnClickListener {
-            this.goToActivityOne()
-        }
+        val menu = binding.menuLayoutBase
 
-        binding.buttonActivityTwo.setOnClickListener {
-            this.goToActivityTwo()
-        }
-
-        binding.buttonActivityThree.setOnClickListener {
-            this.goToActivityThree()
-        }
-
-        binding.buttonActivityFour.setOnClickListener {
-            this.goToActivityFour()
-        }
+        this.listenButtonClick(
+            menu.buttonActivityOne,
+            menu.buttonActivityTwo,
+            menu.buttonActivityThree,
+            menu.buttonActivityFour,
+            menu.buttonActivityFive,
+        )
     }
 
 }

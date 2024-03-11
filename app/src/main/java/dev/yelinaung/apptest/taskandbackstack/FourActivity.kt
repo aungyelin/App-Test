@@ -31,21 +31,15 @@ class FourActivity : BaseTaskAndBackStackActivity<ActivityFourBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.buttonActivityOne.setOnClickListener {
-            this.goToActivityOne()
-        }
+        val menu = binding.menuLayoutFour
 
-        binding.buttonActivityTwo.setOnClickListener {
-            this.goToActivityTwo()
-        }
-
-        binding.buttonActivityThree.setOnClickListener {
-            this.goToActivityThree()
-        }
-
-        binding.buttonActivityFour.setOnClickListener {
-            this.goToActivityFour()
-        }
+        this.listenButtonClick(
+            menu.buttonActivityOne,
+            menu.buttonActivityTwo,
+            menu.buttonActivityThree,
+            menu.buttonActivityFour,
+            menu.buttonActivityFive,
+        )
     }
 
 }

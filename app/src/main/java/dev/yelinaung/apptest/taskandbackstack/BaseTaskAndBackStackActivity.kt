@@ -1,7 +1,9 @@
 package dev.yelinaung.apptest.taskandbackstack
 
 import android.app.ActivityManager
+import android.content.Intent
 import android.util.Log
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import dev.yelinaung.apptest.BaseActivity
 
@@ -20,29 +22,50 @@ abstract class BaseTaskAndBackStackActivity<VB : ViewBinding> : BaseActivity<VB>
         Log.d("TAG", "Task Count = ${tasks.count()}")
 
         tasks.forEachIndexed { index, appTask ->
-            Log.d("TAG", "Activity Count of Task ${index+1} = ${appTask.taskInfo.numActivities}")
+            Log.d("TAG", "Activity Count of Task ${index + 1} = ${appTask.taskInfo.numActivities}")
         }
 
         Log.d("TAG", "----------------------------------------------------------------")
     }
 
-    protected fun goToActivityOne() {
+    protected fun listenButtonClick(
+        buttonOne: View,
+        buttonTwo: View,
+        buttonThree: View,
+        buttonFour: View,
+        buttonFive: View,
+    ) {
+        buttonOne.setOnClickListener { goToActivityOne() }
+        buttonTwo.setOnClickListener { goToActivityTwo() }
+        buttonThree.setOnClickListener { goToActivityThree() }
+        buttonFour.setOnClickListener { goToActivityFour() }
+        buttonFive.setOnClickListener { goToActivityFive() }
+    }
+
+    private fun goToActivityOne() {
         val intent = OneActivity.getInstance(this)
         startActivity(intent)
     }
 
-    protected fun goToActivityTwo() {
+    private fun goToActivityTwo() {
         val intent = TwoActivity.getInstance(this)
         startActivity(intent)
     }
 
-    protected fun goToActivityThree() {
+    private fun goToActivityThree() {
         val intent = ThreeActivity.getInstance(this)
         startActivity(intent)
     }
 
-    protected fun goToActivityFour() {
+    private fun goToActivityFour() {
         val intent = FourActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToActivityFive() {
+        val intent = FiveActivity.getInstance(this)
+        //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 

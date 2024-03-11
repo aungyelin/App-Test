@@ -17,4 +17,5 @@
     <string name="button_go_to_activity_two">Activity Two (Default)</string>
     <string name="button_activity_three_single_task">Activity Three (Single Task)</string>
     <string name="button_activity_four_single_instance">Activity Four (Single Instance)</string>
+    <string name="button_activity_five_flag_new_task">Activity Five (Flag New Task)</string>
 </resources>

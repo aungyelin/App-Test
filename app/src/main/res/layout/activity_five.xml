@@ -4,10 +4,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".taskandbackstack.TaskAndBackStackActivity">
+    tools:context=".taskandbackstack.FiveActivity">
 
     <include
-        android:id="@+id/menu_layout_base"
+        android:id="@+id/menu_layout_five"
         layout="@layout/task_stack_menu" />
 
 </ScrollView>

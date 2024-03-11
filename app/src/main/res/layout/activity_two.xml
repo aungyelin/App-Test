@@ -1,42 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".taskandbackstack.TwoActivity">
 
-    <Button
-        android:id="@+id/buttonActivityOne"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/button_go_to_activity_one" />
+    <include
+        android:id="@+id/menu_layout_two"
+        layout="@layout/task_stack_menu" />
 
-    <Button
-        android:id="@+id/buttonActivityTwo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/button_go_to_activity_two" />
-
-    <Button
-        android:id="@+id/buttonActivityThree"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/button_activity_three_single_task" />
-
-    <Button
-        android:id="@+id/buttonActivityFour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/button_activity_four_single_instance" />
-
-</LinearLayout>
+</ScrollView>
