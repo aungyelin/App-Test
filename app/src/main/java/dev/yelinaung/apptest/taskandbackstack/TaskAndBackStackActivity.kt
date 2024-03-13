@@ -33,6 +33,7 @@ class TaskAndBackStackActivity : BaseTaskAndBackStackActivity<ActivityTaskAndBac
             menu.buttonActivityThree,
             menu.buttonActivityFour,
             menu.buttonActivityFive,
+            menu.buttonActivitySix,
         )
     }
 

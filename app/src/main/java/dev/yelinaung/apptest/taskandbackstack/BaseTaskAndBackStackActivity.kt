@@ -34,12 +34,14 @@ abstract class BaseTaskAndBackStackActivity<VB : ViewBinding> : BaseActivity<VB>
         buttonThree: View,
         buttonFour: View,
         buttonFive: View,
+        buttonSix: View,
     ) {
         buttonOne.setOnClickListener { goToActivityOne() }
         buttonTwo.setOnClickListener { goToActivityTwo() }
         buttonThree.setOnClickListener { goToActivityThree() }
         buttonFour.setOnClickListener { goToActivityFour() }
         buttonFive.setOnClickListener { goToActivityFive() }
+        buttonSix.setOnClickListener { goToActivitySix() }
     }
 
     private fun goToActivityOne() {
@@ -66,6 +68,11 @@ abstract class BaseTaskAndBackStackActivity<VB : ViewBinding> : BaseActivity<VB>
         val intent = FiveActivity.getInstance(this)
         //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    private fun goToActivitySix() {
+        val intent = SixActivity.getInstance(this)
         startActivity(intent)
     }
 
