@@ -13,17 +13,20 @@
         android:theme="@style/Theme.AppTest"
         tools:targetApi="31">
         <activity
-            android:taskAffinity="@string/affinity_calculation"
+            android:name=".userinterface.UserInterfaceActivity"
+            android:exported="false" />
+        <activity
             android:name=".taskandbackstack.EightActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:taskAffinity="@string/affinity_calculation" />
         <activity
-            android:taskAffinity="@string/affinity_calculation"
             android:name=".taskandbackstack.SevenActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:taskAffinity="@string/affinity_calculation" />
         <activity
-            android:taskAffinity="@string/affinity_calculation"
             android:name=".taskandbackstack.SixActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:taskAffinity="@string/affinity_calculation" />
         <activity
             android:name=".taskandbackstack.FiveActivity"
             android:exported="false" />

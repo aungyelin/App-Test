@@ -7,6 +7,7 @@ import dev.yelinaung.apptest.databinding.ActivityMainBinding
 import dev.yelinaung.apptest.intent.IntentActivity
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
 import dev.yelinaung.apptest.taskandbackstack.TaskAndBackStackActivity
+import dev.yelinaung.apptest.userinterface.UserInterfaceActivity
 import java.util.Date
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -36,6 +37,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnTaskAndBackStack.setOnClickListener {
             this.goToTaskAndBackStackActivity()
         }
+
+        binding.btnUserInterface.setOnClickListener {
+            this.goToUserInterfaceActivity()
+        }
     }
 
     private fun goToLifecycleScreen() {
@@ -55,6 +60,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToTaskAndBackStackActivity() {
         val intent = TaskAndBackStackActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToUserInterfaceActivity() {
+        val intent = UserInterfaceActivity.getInstance(this)
         startActivity(intent)
     }
 

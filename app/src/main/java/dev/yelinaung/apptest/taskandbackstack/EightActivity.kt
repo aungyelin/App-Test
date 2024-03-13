@@ -28,6 +28,8 @@ class EightActivity : BaseTaskAndBackStackActivity<ActivityEightBinding>() {
 
     override val pageTitle: String get() = "Activity Eight"
 
+    private val pageSubtitle: String get() = "Check the result"
+
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityEightBinding {
         return ActivityEightBinding.inflate(layoutInflater)
     }
@@ -35,6 +37,8 @@ class EightActivity : BaseTaskAndBackStackActivity<ActivityEightBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.subtitle = pageSubtitle
 
         val result: Int = intent.getIntExtra(VALUE_RESULT, 0)
 

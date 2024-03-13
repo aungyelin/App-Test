@@ -23,6 +23,7 @@ class SixActivity : BaseTaskAndBackStackActivity<ActivitySixBinding>() {
     }
 
     override val pageTitle: String get() = "Activity Six"
+    private val pageSubtitle: String get() = "Enter numbers to operate"
 
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivitySixBinding {
         return ActivitySixBinding.inflate(layoutInflater)
@@ -30,6 +31,8 @@ class SixActivity : BaseTaskAndBackStackActivity<ActivitySixBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.subtitle = pageSubtitle
 
         binding.btnNext.setOnClickListener { this.goToChooseOperation() }
     }

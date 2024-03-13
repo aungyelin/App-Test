@@ -5,6 +5,7 @@
     <string name="activity_lifecycle">Activity Lifecycle</string>
     <string name="intent">Intent</string>
     <string name="task_and_back_stack">Task and Back Stack</string>
+    <string name="user_interface">User Interface</string>
 
     <string name="button_next">Next</string>
     <string name="button_finish">Finish</string>

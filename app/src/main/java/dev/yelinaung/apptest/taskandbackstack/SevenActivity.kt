@@ -24,6 +24,8 @@ class SevenActivity : BaseTaskAndBackStackActivity<ActivitySevenBinding>() {
 
     override val pageTitle: String get() = "Activity Seven"
 
+    private val pageSubtitle: String get() = "Choose operation"
+
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivitySevenBinding {
         return ActivitySevenBinding.inflate(layoutInflater)
     }
@@ -31,6 +33,8 @@ class SevenActivity : BaseTaskAndBackStackActivity<ActivitySevenBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.subtitle = pageSubtitle
 
         val valueOne = intent.getIntExtra(VALUE_ONE, 0)
         val valueTwo = intent.getIntExtra(VALUE_TWO, 0)
