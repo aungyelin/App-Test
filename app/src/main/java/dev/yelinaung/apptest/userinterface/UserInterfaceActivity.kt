@@ -1,20 +1,22 @@
 package dev.yelinaung.apptest.userinterface
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityUserInterfaceBinding
-import dev.yelinaung.apptest.taskandbackstack.EightActivity
 
 class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
 
@@ -32,15 +34,42 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
         return ActivityUserInterfaceBinding.inflate(layoutInflater)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val textView: View = binding.textViewOne
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
-        binding.textViewOne.text = "Testing"
-        binding.textViewOne.alpha = 0.7f
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
-        textView.alpha = 0.5f
+            override fun afterTextChanged(p0: Editable?) {
+                TODO("Not yet implemented")
+            }
+        }
+        binding.edtOne.addTextChangedListener(textWatcher)
+        binding.edtOne.removeTextChangedListener(textWatcher)
+
+        binding.edtOne.doBeforeTextChanged { text, start, count, after ->  }
+        binding.edtOne.doOnTextChanged { text, start, before, count ->  }
+        binding.edtOne.addTextChangedListener {
+            if (it.toString().count() >= 8) {
+                binding.tvOne.text = it
+            } else {
+                binding.tvOne.text = "Invalid Text Input"
+            }
+        }
+
+        binding.btnShowToast.setOnClickListener {
+            val button = it as Button
+            val text = button.text
+            val toast = Toast.makeText(this@UserInterfaceActivity, text, Toast.LENGTH_LONG)
+            toast.show()
+        }
     }
 
 }
