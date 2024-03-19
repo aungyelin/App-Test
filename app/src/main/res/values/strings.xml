@@ -22,6 +22,8 @@
     <string name="button_activity_four_single_instance">Activity Four (Single Instance)</string>
     <string name="button_activity_five_flag_new_task">Activity Five (Flag New Task)</string>
     <string name="button_activity_six_affinities">Activity Six (Affinities)</string>
+    <string name="button_basic_view">Basic Views</string>
+    <string name="button_layouts">Layouts</string>
 
     <string name="hint_value_one">Value One</string>
     <string name="hint_value_two">Value Two</string>

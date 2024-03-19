@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppTest"
         tools:targetApi="31">
         <activity
+            android:name=".userinterface.BasicViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".userinterface.LayoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".userinterface.UserInterfaceActivity"
             android:exported="false" />
         <activity
