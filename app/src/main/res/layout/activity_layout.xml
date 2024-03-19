@@ -1,16 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4"
     tools:context=".userinterface.LayoutActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="AAAAAAA"
-        tools:ignore="HardcodedText" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="20sp">
 
-</FrameLayout>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/holo_green_dark" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+            android:background="@android:color/holo_green_dark" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:background="@android:color/holo_green_dark" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|center"
+            android:background="@android:color/holo_green_dark" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
+        android:padding="20sp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            tools:ignore="NestedWeights" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_dark" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_dark" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@android:color/holo_orange_dark" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_blue_bright">
+
+        <View
+            android:id="@+id/vOne"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/holo_green_dark" />
+
+        <View
+            android:id="@+id/vTwo"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
+            android:layout_alignBottom="@id/vOne"
+            android:layout_marginEnd="20sp"
+            android:layout_marginBottom="-20dp"
+            android:layout_toStartOf="@id/vOne"
+            android:background="@android:color/holo_red_dark" />
+
+        <View
+            android:id="@+id/vThree"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@id/vOne"
+            android:layout_alignTop="@id/vOne"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="-60dp"
+            android:background="@android:color/holo_blue_dark" />
+
+        <View
+            android:id="@+id/vFour"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
+            android:layout_alignBottom="@id/vOne"
+            android:layout_marginStart="20sp"
+            android:layout_marginBottom="-20dp"
+            android:layout_toEndOf="@id/vOne"
+            android:background="@android:color/holo_orange_dark" />
+
+        <View
+            android:id="@+id/vFive"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@id/vOne"
+            android:layout_alignBottom="@id/vOne"
+            android:layout_marginEnd="-20dp"
+            android:layout_marginBottom="-60dp"
+            android:background="@android:color/holo_purple" />
+
+        <View
+            android:id="@+id/vSix"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@id/vOne"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="-10dp"
+            android:layout_toEndOf="@id/vOne"
+            android:background="@android:color/black" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_green_dark">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
