@@ -29,6 +29,7 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
 
         binding.btnBasicView.setOnClickListener { this.goToBasicViews() }
         binding.btnLayouts.setOnClickListener { this.goToLayoutActivity() }
+        binding.btnConstraintLayouts.setOnClickListener { this.goToConstraintLayoutActivity() }
     }
 
     private fun goToBasicViews() {
@@ -38,6 +39,11 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
 
     private fun goToLayoutActivity() {
         val intent = LayoutActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToConstraintLayoutActivity() {
+        val intent = ConstraintLayoutActivity.getInstance(this)
         startActivity(intent)
     }
 

@@ -10,24 +10,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.R
-import dev.yelinaung.apptest.databinding.ActivityLayoutBinding
+import dev.yelinaung.apptest.databinding.ActivityConstraintLayoutBinding
 
-class LayoutActivity : BaseActivity<ActivityLayoutBinding>() {
+class ConstraintLayoutActivity : BaseActivity<ActivityConstraintLayoutBinding>() {
 
     companion object {
 
         fun getInstance(context: Context): Intent {
-            return Intent(context, LayoutActivity::class.java)
+            return Intent(context, ConstraintLayoutActivity::class.java)
         }
 
     }
 
-    override val pageTitle: String get() = "Layout Activity"
+    override val pageTitle: String get() = "Constraint Layout"
 
-    override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityLayoutBinding {
-        return ActivityLayoutBinding.inflate(layoutInflater)
+    override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityConstraintLayoutBinding {
+        return ActivityConstraintLayoutBinding.inflate(layoutInflater)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -24,6 +24,12 @@
             android:layout_height="wrap_content"
             android:text="@string/button_layouts" />
 
+        <Button
+            android:id="@+id/btn_constraint_layouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_constraint_layout" />
+
     </LinearLayout>
 
 </ScrollView>

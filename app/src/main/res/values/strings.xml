@@ -24,6 +24,7 @@
     <string name="button_activity_six_affinities">Activity Six (Affinities)</string>
     <string name="button_basic_view">Basic Views</string>
     <string name="button_layouts">Layouts</string>
+    <string name="button_constraint_layout">Constraint Layout</string>
 
     <string name="hint_value_one">Value One</string>
     <string name="hint_value_two">Value Two</string>
