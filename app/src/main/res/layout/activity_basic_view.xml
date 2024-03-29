@@ -35,12 +35,33 @@
 
     <Button
         android:id="@+id/btn_show_toast"
-        android:text="Show Toast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
         android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="20sp"
+        android:text="Show Toast"
         app:layout_constraintTop_toBottomOf="@id/edt_one"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20sp"
+        android:background="@android:color/holo_green_dark"
+        android:src="@drawable/camera"
+        app:layout_constraintBottom_toTopOf="@+id/btn_change_photo"
+        app:layout_constraintTop_toBottomOf="@+id/btn_show_toast"
+        tools:ignore="ContentDescription" />
+
+    <Button
+        android:id="@+id/btn_change_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginBottom="20sp"
+        android:text="Change Photo"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
