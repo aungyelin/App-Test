@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityDialogsBinding
+import dev.yelinaung.apptest.databinding.CustomDialogBinding
 
 class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
 
@@ -37,6 +38,7 @@ class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
                 Pair("OK", {})
             )
         }
+        binding.btnCustom.setOnClickListener { this.showCustomDialog() }
     }
 
     private fun showAlertDialog(
@@ -63,6 +65,31 @@ class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
 
             create()
             show()
+        }
+    }
+
+    private fun showCustomDialog() {
+        val dialogBinding = CustomDialogBinding.inflate(layoutInflater)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .setOnCancelListener {
+                Log.d("Test", "Cancelled Custom Dialog")
+            }
+            .setOnDismissListener {
+                Log.d("Test", "Dismissed Custom Dialog")
+            }
+            .setCancelable(false)
+            .create()
+
+        dialog.show()
+
+        dialogBinding.btnShow.setOnClickListener {
+            Toast.makeText(this, dialogBinding.edtMessage.text.toString(), Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        dialogBinding.btnClear.setOnClickListener {
+            dialogBinding.edtMessage.text?.clear()
         }
     }
 
