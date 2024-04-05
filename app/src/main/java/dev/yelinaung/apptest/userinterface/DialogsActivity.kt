@@ -1,5 +1,6 @@
 package dev.yelinaung.apptest.userinterface
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityDialogsBinding
 import dev.yelinaung.apptest.databinding.CustomDialogBinding
+import java.util.Calendar
+import java.util.Date
 
 class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
 
@@ -39,6 +42,7 @@ class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
             )
         }
         binding.btnCustom.setOnClickListener { this.showCustomDialog() }
+        binding.btnDatePicker.setOnClickListener { this.showDatePicker() }
     }
 
     private fun showAlertDialog(
@@ -91,6 +95,30 @@ class DialogsActivity : BaseActivity<ActivityDialogsBinding>() {
         dialogBinding.btnClear.setOnClickListener {
             dialogBinding.edtMessage.text?.clear()
         }
+    }
+
+    private fun showDatePicker() {
+        val dialog = DatePickerDialog(this)
+
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+
+        dialog.datePicker.updateDate(year, month, 1)
+        dialog.datePicker.maxDate = c.time.time
+
+        c.set(Calendar.YEAR, year - 1)
+        c.add(Calendar.YEAR, -1)
+        dialog.datePicker.minDate = c.time.time
+
+        dialog.setOnDateSetListener { datePicker, y, m, d ->
+            c.set(Calendar.YEAR, y)
+            c.set(Calendar.MONTH, m)
+            c.set(Calendar.DATE, d)
+            Toast.makeText(this, c.time.toString(), Toast.LENGTH_LONG).show()
+        }
+
+        dialog.show()
     }
 
 }

@@ -22,4 +22,11 @@
         android:text="Show Custom Dialog"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/btn_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date Picker Dialog"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>
