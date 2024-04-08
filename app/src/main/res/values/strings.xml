@@ -27,6 +27,7 @@
     <string name="button_constraint_layout">Constraint Layout</string>
     <string name="button_animate">Animate</string>
     <string name="button_dialogs">Dialogs</string>
+    <string name="button_sheets">Sheets</string>
 
     <string name="hint_value_one">Value One</string>
     <string name="hint_value_two">Value Two</string>
