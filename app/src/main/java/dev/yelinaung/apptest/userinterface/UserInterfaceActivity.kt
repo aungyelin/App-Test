@@ -32,6 +32,7 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
         binding.btnConstraintLayouts.setOnClickListener { this.goToConstraintLayoutActivity() }
         binding.btnDialogs.setOnClickListener { this.goToDialogsActivity() }
         binding.btnSheets.setOnClickListener { this.goToSheetsActivity() }
+        binding.btnFragments.setOnClickListener { this.goToFragmentsActivity() }
     }
 
     private fun goToBasicViews() {
@@ -56,6 +57,11 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
 
     private fun goToSheetsActivity() {
         val intent = SheetsActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToFragmentsActivity() {
+        val intent = FragmentDemoActivity.getInstance(this)
         startActivity(intent)
     }
 

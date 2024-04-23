@@ -7,14 +7,51 @@
     android:layout_height="match_parent"
     tools:context=".userinterface.SheetsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btn_show_standard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Standard Bottom Sheet"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btn_show_modal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Modal Bottom Sheet"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/standard_bottom_sheet"
         style="?attr/bottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/holo_green_dark"
+        android:maxHeight="500dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="100dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/modal_bottom_sheet"
+        style="?attr/bottomSheetStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_dark"
+        android:maxHeight="500dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="100dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

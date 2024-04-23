@@ -28,6 +28,7 @@
     <string name="button_animate">Animate</string>
     <string name="button_dialogs">Dialogs</string>
     <string name="button_sheets">Sheets</string>
+    <string name="button_fragments">Fragments</string>
 
     <string name="hint_value_one">Value One</string>
     <string name="hint_value_two">Value Two</string>
@@ -35,4 +36,6 @@
     <string name="label_result">Result</string>
 
     <string name="affinity_calculation">affinity.calculation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
