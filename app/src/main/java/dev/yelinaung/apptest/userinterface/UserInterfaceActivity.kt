@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.core.app.ActivityOptionsCompat
 import dev.yelinaung.apptest.BaseActivity
+import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityUserInterfaceBinding
 
 class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {

@@ -39,7 +39,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
     private fun showFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .add(R.id.container_one, fragment)
+            .setCustomAnimations(
+                R.anim.slide_in_right, R.anim.slightly_slide_out_left,
+                R.anim.slightly_slide_in_left, R.anim.slide_out_right
+            )
+            .replace(R.id.container_one, fragment)
             .addToBackStack(fragment.javaClass.name)
             .commit()
     }
