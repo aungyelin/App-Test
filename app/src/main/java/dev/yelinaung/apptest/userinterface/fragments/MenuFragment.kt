@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.FragmentMenuBinding
 
@@ -23,14 +24,23 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
         binding.btnOne.setOnClickListener { showFragment(StepOneFragment.getInstance()) }
         binding.btnTwo.setOnClickListener { showFragment(StepTwoFragment.getInstance()) }
-        binding.btnThree.setOnClickListener { }
-        binding.btnFour.setOnClickListener { }
+        binding.btnThree.setOnClickListener { showFragment(StepThreeFragment.getInstance()) }
+        binding.btnFour.setOnClickListener { showFragment(StepFourFragment.getInstance()) }
+
+        binding.btnBack.setOnClickListener {
+            /*requireActivity().supportFragmentManager.popBackStack(
+                StepTwoFragment::class.java.name,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )*/
+            requireActivity().supportFragmentManager.popBackStackImmediate()
+        }
     }
 
     private fun showFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .add(R.id.container_one, fragment)
+            .addToBackStack(fragment.javaClass.name)
             .commit()
     }
 
