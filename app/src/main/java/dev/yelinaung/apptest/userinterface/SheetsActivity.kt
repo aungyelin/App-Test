@@ -10,15 +10,14 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivitySheetsBinding
+import dev.yelinaung.apptest.userinterface.sheets.ModalSheet
 
-class SheetsActivity : BaseActivity<ActivitySheetsBinding>() {
+class SheetsActivity : BaseActivity<ActivitySheetsBinding>(), ModalSheet.ModalSheetCallback {
 
     companion object {
-
         fun getInstance(context: Context): Intent {
             return Intent(context, SheetsActivity::class.java)
         }
-
     }
 
     override val pageTitle: String get() = "Sheets Activity"
@@ -26,6 +25,8 @@ class SheetsActivity : BaseActivity<ActivitySheetsBinding>() {
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivitySheetsBinding {
         return ActivitySheetsBinding.inflate(layoutInflater)
     }
+
+    private var dialog: ModalSheet? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,9 @@ class SheetsActivity : BaseActivity<ActivitySheetsBinding>() {
             val standardBottomSheetBehavior = BottomSheetBehavior.from(binding.standardBottomSheet)
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
-        binding.btnShowModal.setOnClickListener {  }
+        binding.btnShowModal.setOnClickListener {
+            this.showModalBottomSheet()
+        }
     }
 
     private fun setupStandardBottomSheet() {
@@ -65,6 +68,21 @@ class SheetsActivity : BaseActivity<ActivitySheetsBinding>() {
 
         standardBottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
         //standardBottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
+    }
+
+    private fun showModalBottomSheet() {
+        /*dialog = ModalSheet.getInstance(object : ModalSheet.ModalSheetCallback {
+            override fun showMessage(msg: String) {
+
+            }
+        })*/
+        dialog = ModalSheet()
+        dialog?.show(this.supportFragmentManager, null)
+    }
+
+    override fun showMessage(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        dialog?.dismiss()
     }
 
 }
