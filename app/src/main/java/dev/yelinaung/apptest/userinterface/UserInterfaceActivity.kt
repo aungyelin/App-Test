@@ -35,6 +35,8 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
         binding.btnDialogs.setOnClickListener { this.goToDialogsActivity() }
         binding.btnSheets.setOnClickListener { this.goToSheetsActivity() }
         binding.btnFragments.setOnClickListener { this.goToFragmentsActivity() }
+        binding.btnDrawer.setOnClickListener { this.goToDrawerActivity() }
+        binding.btnTab.setOnClickListener { this.goToTabsActivity() }
     }
 
     private fun goToBasicViews() {
@@ -64,6 +66,16 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
 
     private fun goToFragmentsActivity() {
         val intent = FragmentDemoActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToDrawerActivity() {
+        val intent = DrawerActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToTabsActivity() {
+        val intent = TabsActivity.getInstance(this)
         startActivity(intent)
     }
 

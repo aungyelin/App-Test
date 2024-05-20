@@ -48,6 +48,18 @@
             android:layout_height="wrap_content"
             android:text="@string/button_fragments" />
 
+        <Button
+            android:id="@+id/btn_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_drawer" />
+
+        <Button
+            android:id="@+id/btn_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_tab" />
+
     </LinearLayout>
 
 </ScrollView>

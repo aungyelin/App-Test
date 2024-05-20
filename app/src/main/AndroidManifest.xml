@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppTest"
         tools:targetApi="31">
         <activity
+            android:name=".userinterface.TabsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".userinterface.DrawerActivity"
+            android:exported="false" />
+        <activity
             android:name=".userinterface.FragmentDemoActivity"
             android:exported="false" />
         <activity

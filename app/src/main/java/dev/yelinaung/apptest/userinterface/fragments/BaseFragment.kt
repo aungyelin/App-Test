@@ -2,11 +2,14 @@ package dev.yelinaung.apptest.userinterface.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import dev.yelinaung.apptest.R
+import dev.yelinaung.apptest.databinding.FragmentBaseBinding
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
@@ -18,53 +21,34 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): VB
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = setupViewBinding(inflater, container, savedInstanceState)
-        return binding.root
+
+        val baseFragmentBinding = FragmentBaseBinding.inflate(inflater, container, false)
+        baseFragmentBinding.baseFragmentContainer.removeAllViews()
+        baseFragmentBinding.baseFragmentContainer.addView(binding.root)
+
+        return baseFragmentBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
+    fun showFragment(
+        fragment: Fragment,
+        replace: Boolean = false,
+        addToBackStack: Boolean = true
+    ) {
+        val transaction = childFragmentManager.beginTransaction().apply {
+            if (addToBackStack) { addToBackStack(fragment.javaClass.name) }
+        }
+        if (replace) {
+            transaction.replace(R.id.base_fragment_container, fragment)
+        } else {
+            transaction.add(R.id.base_fragment_container, fragment)
+        }
+        transaction.commit()
     }
 
 }

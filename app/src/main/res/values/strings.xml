@@ -29,6 +29,27 @@
     <string name="button_dialogs">Dialogs</string>
     <string name="button_sheets">Sheets</string>
     <string name="button_fragments">Fragments</string>
+    <string name="button_drawer">Drawer</string>
+    <string name="button_tab">Tabs</string>
+    <string name="button_language_change">Language Change</string>
+
+    <string name="menu_all_mail">All mail</string>
+    <string name="menu_title_main">Main</string>
+    <string name="menu_inbox">Inbox</string>
+    <string name="menu_sent">Sent</string>
+    <string name="menu_draft">Drafts</string>
+    <string name="menu_spam">Spam</string>
+    <string name="menu_trash">Trash</string>
+    <string name="menu_title_others">Others</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_support">Support</string>
+    <string name="menu_about">About Us</string>
+    <string name="menu_home">Home</string>">
+    <string name="menu_notifications">Notifications</string>
+
+    <string name="tab_home">Home</string>
+    <string name="tab_notifications">Notifications</string>
+    <string name="tab_settings">Settings</string>
 
     <string name="hint_value_one">Value One</string>
     <string name="hint_value_two">Value Two</string>
