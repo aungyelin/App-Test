@@ -11,7 +11,7 @@ import dev.yelinaung.apptest.databinding.FragmentSettingsBinding
 import dev.yelinaung.apptest.userinterface.TabsActivity
 import dev.yelinaung.apptest.userinterface.fragments.BaseFragment
 
-class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
+class SettingsFragment : FirstLevelFragment<FragmentSettingsBinding>() {
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
@@ -27,6 +27,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
         binding.btnLanguageChange.setOnClickListener {
             (requireActivity() as? TabsActivity)?.navigateToLanguageSettings()
+        }
+
+        binding.btnThemeChange.setOnClickListener {
+            (requireActivity() as? TabsActivity)?.navigateToThemeSettings()
         }
     }
 

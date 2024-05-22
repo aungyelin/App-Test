@@ -1,19 +1,21 @@
 package dev.yelinaung.apptest.userinterface.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import dev.yelinaung.apptest.R
-import dev.yelinaung.apptest.databinding.FragmentBaseBinding
+import dev.yelinaung.apptest.databinding.FragmentNoTitleBinding
+import dev.yelinaung.apptest.databinding.FragmentWithTitleBinding
+import dev.yelinaung.apptest.userinterface.TabsActivity
+import dev.yelinaung.apptest.userinterface.tabs.FirstLevelFragment
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     protected lateinit var binding: VB
+    protected open var pageTitle: String? = null
 
     abstract fun setupViewBinding(
         inflater: LayoutInflater,
@@ -28,27 +30,22 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     ): View? {
         binding = setupViewBinding(inflater, container, savedInstanceState)
 
-        val baseFragmentBinding = FragmentBaseBinding.inflate(inflater, container, false)
-        baseFragmentBinding.baseFragmentContainer.removeAllViews()
-        baseFragmentBinding.baseFragmentContainer.addView(binding.root)
-
-        return baseFragmentBinding.root
-    }
-
-    fun showFragment(
-        fragment: Fragment,
-        replace: Boolean = false,
-        addToBackStack: Boolean = true
-    ) {
-        val transaction = childFragmentManager.beginTransaction().apply {
-            if (addToBackStack) { addToBackStack(fragment.javaClass.name) }
-        }
-        if (replace) {
-            transaction.replace(R.id.base_fragment_container, fragment)
+        if (this is FirstLevelFragment) {
+            val baseFragmentBinding = FragmentNoTitleBinding.inflate(inflater, container, false)
+            baseFragmentBinding.fragmentContainer.removeAllViews()
+            baseFragmentBinding.fragmentContainer.addView(binding.root)
+            return baseFragmentBinding.root
         } else {
-            transaction.add(R.id.base_fragment_container, fragment)
+            val baseFragmentBinding = FragmentWithTitleBinding.inflate(inflater, container, false)
+            baseFragmentBinding.fragmentContainer.removeAllViews()
+            baseFragmentBinding.fragmentContainer.addView(binding.root)
+            baseFragmentBinding.toolbar.title = pageTitle
+            baseFragmentBinding.toolbar.setNavigationIcon(R.drawable.ic_back_arrow)
+            baseFragmentBinding.toolbar.setNavigationOnClickListener {
+                (requireActivity() as? TabsActivity)?.navigateBack()
+            }
+            return baseFragmentBinding.root
         }
-        transaction.commit()
     }
 
 }

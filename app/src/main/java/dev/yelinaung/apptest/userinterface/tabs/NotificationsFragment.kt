@@ -9,7 +9,7 @@ import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.FragmentNotificationsBinding
 import dev.yelinaung.apptest.userinterface.fragments.BaseFragment
 
-class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
+class NotificationsFragment : FirstLevelFragment<FragmentNotificationsBinding>() {
 
     override fun setupViewBinding(
         inflater: LayoutInflater,

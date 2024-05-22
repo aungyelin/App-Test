@@ -6,16 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
+import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.ActivityTabsBinding
-import dev.yelinaung.apptest.userinterface.fragments.BaseFragment
+import dev.yelinaung.apptest.userinterface.tabs.FirstLevelFragment
 import dev.yelinaung.apptest.userinterface.tabs.HomeFragment
 import dev.yelinaung.apptest.userinterface.tabs.LanguageFragment
 import dev.yelinaung.apptest.userinterface.tabs.NotificationsFragment
 import dev.yelinaung.apptest.userinterface.tabs.SettingsFragment
+import dev.yelinaung.apptest.userinterface.tabs.ThemeFragment
 
 class TabsActivity : BaseActivity<ActivityTabsBinding>() {
 
@@ -34,6 +36,8 @@ class TabsActivity : BaseActivity<ActivityTabsBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        onBackPressedDispatcher.addCallback(this) { handleBackPress() }
 
         this.supportActionBar?.hide()
         this.setupTabs()
@@ -80,7 +84,7 @@ class TabsActivity : BaseActivity<ActivityTabsBinding>() {
             return field
         }
 
-    private fun getFragmentByTab(tab: Tabs): Fragment {
+    private fun getFragmentByTab(tab: Tabs): FirstLevelFragment<*> {
         return when (tab) {
             Tabs.HOME -> homeFragment
             Tabs.NOTIFICATIONS -> notiFragment
@@ -129,10 +133,40 @@ class TabsActivity : BaseActivity<ActivityTabsBinding>() {
         }*/
     }
 
+    private fun handleBackPress() {
+        if (supportFragmentManager.popBackStackImmediate()) {
+            /** So it popped the dialog fragment back stack. */
+        } else if (popBackChildFragment()) {
+            /** So it popped the child fragment back stack. */
+        } else if (selectedTab != Tabs.entries.first()) {
+            selectedTab = Tabs.entries.first()
+        } else {
+            finish()
+        }
+    }
+
+    private fun popBackChildFragment(): Boolean {
+        return selectedTab?.let {
+            getFragmentByTab(it).let { firstLevelFrag ->
+                firstLevelFrag.isVisible && firstLevelFrag.onBackPressed()
+            }
+        } ?: false
+    }
+
     fun navigateToLanguageSettings() {
         selectedTab?.let {
-            (getFragmentByTab(it) as? BaseFragment<*>)?.showFragment(LanguageFragment())
+            (getFragmentByTab(it)).showFragment(LanguageFragment())
         }
+    }
+
+    fun navigateToThemeSettings() {
+        selectedTab?.let {
+            (getFragmentByTab(it)).showFragment(ThemeFragment())
+        }
+    }
+
+    fun navigateBack() {
+        onBackPressedDispatcher.onBackPressed()
     }
 
 }
