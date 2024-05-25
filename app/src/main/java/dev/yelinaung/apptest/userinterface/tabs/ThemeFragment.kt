@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.FragmentThemeBinding
+import dev.yelinaung.apptest.userinterface.TabsActivity
 import dev.yelinaung.apptest.userinterface.fragments.BaseFragment
 
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
@@ -19,6 +20,14 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         savedInstanceState: Bundle?
     ): FragmentThemeBinding {
         return FragmentThemeBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnBack.setOnClickListener {
+            (requireActivity() as? TabsActivity)?.navigateBack(LanguageFragment::class.java.name)
+        }
     }
 
 }

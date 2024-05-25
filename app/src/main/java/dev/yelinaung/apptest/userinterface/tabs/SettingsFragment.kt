@@ -32,6 +32,10 @@ class SettingsFragment : FirstLevelFragment<FragmentSettingsBinding>() {
         binding.btnThemeChange.setOnClickListener {
             (requireActivity() as? TabsActivity)?.navigateToThemeSettings()
         }
+
+        binding.btnAboutUs.setOnClickListener {
+            (requireActivity() as? TabsActivity)?.navigateToAboutUs()
+        }
     }
 
 }
