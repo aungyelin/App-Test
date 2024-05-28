@@ -60,6 +60,18 @@
             android:layout_height="wrap_content"
             android:text="@string/button_tab" />
 
+        <Button
+            android:id="@+id/btn_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_listview" />
+
+        <Button
+            android:id="@+id/btn_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_recyclerview" />
+
     </LinearLayout>
 
 </ScrollView>
