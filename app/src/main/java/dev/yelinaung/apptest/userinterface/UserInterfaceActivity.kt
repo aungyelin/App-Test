@@ -87,7 +87,8 @@ class UserInterfaceActivity : BaseActivity<ActivityUserInterfaceBinding>() {
     }
 
     private fun goToRecyclerview() {
-
+        val intent = RecyclerViewActivity.getInstance(this)
+        startActivity(intent)
     }
 
 }
