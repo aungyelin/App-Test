@@ -8,6 +8,16 @@
     android:paddingVertical="30dp"
     tools:context=".userinterface.tabs.ThemeFragment">
 
+    <ImageView
+        android:src="@drawable/sky"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:ignore="ContentDescription" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"

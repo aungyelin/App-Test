@@ -6,6 +6,8 @@ import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
 import dev.yelinaung.apptest.intent.IntentActivity
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
+import dev.yelinaung.apptest.resources.ResourcesActivity
+import dev.yelinaung.apptest.sharepreference.SharePreferenceActivity
 import dev.yelinaung.apptest.taskandbackstack.TaskAndBackStackActivity
 import dev.yelinaung.apptest.userinterface.UserInterfaceActivity
 import java.util.Date
@@ -41,6 +43,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnUserInterface.setOnClickListener {
             this.goToUserInterfaceActivity()
         }
+
+        binding.btnResources.setOnClickListener {
+            this.goToResourcesActivity()
+        }
+
+        binding.btnSharePreference.setOnClickListener {
+            this.goToSharePreferenceActivity()
+        }
     }
 
     private fun goToLifecycleScreen() {
@@ -65,6 +75,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToUserInterfaceActivity() {
         val intent = UserInterfaceActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToResourcesActivity() {
+        val intent = ResourcesActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToSharePreferenceActivity() {
+        val intent = SharePreferenceActivity.getInstance(this)
         startActivity(intent)
     }
 

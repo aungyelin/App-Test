@@ -6,6 +6,8 @@
     <string name="intent">Intent</string>
     <string name="task_and_back_stack">Task and Back Stack</string>
     <string name="user_interface">User Interface</string>
+    <string name="resources">Resources</string>
+    <string name="share_preference">Share Preference</string>
 
     <string name="button_next">Next</string>
     <string name="button_finish">Finish</string>
@@ -59,8 +61,12 @@
     <string name="hint_value_two">Value Two</string>
 
     <string name="label_result">Result</string>
+    <string name="label_resource_subtitle">Android resources will be testing in this page.</string>
+    <string name="label_string_resource">String Resources</string>
+    <string name="label_dynamic_string">%1$s has %4$d %2$s and %5$d %3$s.</string>
+    <string name="label_localized_string">This is a localized string.</string>
 
     <string name="affinity_calculation">affinity.calculation</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_save">Save</string>
 </resources>
