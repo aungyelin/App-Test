@@ -26,7 +26,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(this !is MainActivity)
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Toast.makeText(this, "onNewIntent", Toast.LENGTH_LONG).show()
     }
