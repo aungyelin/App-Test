@@ -3,6 +3,7 @@ package dev.yelinaung.apptest.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import dev.yelinaung.apptest.database.entity.Product
 
 @Dao
@@ -16,5 +17,8 @@ interface ProductDAO {
 
     @Insert
     fun insertAll(products: List<Product>)
+
+    @Query("SELECT * FROM product")
+    fun getAllProducts(): List<Product>
 
 }

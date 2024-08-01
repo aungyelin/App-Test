@@ -61,4 +61,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-rxjava3:$roomVersion")
     implementation("androidx.room:room-paging:$roomVersion")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }

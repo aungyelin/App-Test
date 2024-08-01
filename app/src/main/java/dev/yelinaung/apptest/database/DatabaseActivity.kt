@@ -1,18 +1,30 @@
 package dev.yelinaung.apptest.database
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.database.entity.Product
 import dev.yelinaung.apptest.databinding.ActivityDatabaseBinding
-import kotlin.random.Random
+import dev.yelinaung.apptest.databinding.ProductItemBinding
+import dev.yelinaung.apptest.helper.MyApp
+import dev.yelinaung.apptest.helper.ScreenAnimation
+import dev.yelinaung.apptest.helper.showDialogFragment
+import dev.yelinaung.apptest.helper.showToast
 
 class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
 
-    private lateinit var db: MyDatabase
+    private val db by lazy { (application as MyApp).db }
+
+    private val adapter = MyAdapter(this::onClickProduct)
 
     companion object {
 
@@ -32,41 +44,95 @@ class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.initDatabase()
         this.setupUI()
-    }
-
-    private fun initDatabase() {
-        this.db = Room.databaseBuilder(
-            applicationContext,
-            MyDatabase::class.java,
-            "my-database"
-        )
-            .allowMainThreadQueries()
-            .build()
+        this.getProducts()
     }
 
     private fun setupUI() {
+        binding.rvProduct.adapter = adapter
+        binding.rvProduct.layoutManager = LinearLayoutManager(this)
 
-        binding.btnInsertProduct.setOnClickListener { this.addProduct() }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            this.getProducts()
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            showDialogFragment(AddProductFragment.getInstance(), animation = ScreenAnimation.ENTER_UP_EXIT_STAY)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun getProducts() {
+        AsyncTask.execute { // Insert Data
+            val products = this.db.productDAO().getAllProducts()
+            runOnUiThread {
+                adapter.items = products
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun onClickProduct(product: Product) {
+        showToast("Clicked ${product.name}")
+    }
+
+    private class MyAdapter(
+        private val onClickProduct: (Product) -> Unit
+    ) : RecyclerView.Adapter<MyViewHolder>() {
+
+        var items = listOf<Product>()
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            return MyViewHolder(
+                ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                onClickProduct
+            )
+        }
+
+        override fun getItemCount(): Int {
+            return items.count()
+        }
+
+        override fun onViewRecycled(holder: MyViewHolder) {
+            super.onViewRecycled(holder)
+            holder.clearData()
+        }
+
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            holder.setupData(items[position])
+            Log.d("TAG", "onBindViewHolder: $position")
+        }
 
     }
 
-    private fun addProduct() {
-        val name = binding.edtProductName.text.toString()
-        val desc = binding.edtProductDesc.text.toString()
-        val price = Random.nextInt(500, 1000).toDouble()
-        val brand = "My Brand"
+    private class MyViewHolder(
+        val binding: ProductItemBinding,
+        private val onClickProduct: (Product) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        val product = Product(
-            id = 0,
-            name = name,
-            description = desc,
-            price = price,
-            brand = brand
-        )
+        @SuppressLint("SetTextI18n")
+        fun setupData(product: Product) {
+            binding.tvTitle.text = product.name
+            binding.tvDesc.text = product.description
+            binding.tvPrice.text = "${product.price} MMK"
 
-        this.db.productDAO().insert(product)
+            itemView.setOnClickListener {
+                onClickProduct.invoke(product)
+            }
+            itemView.setOnLongClickListener {
+                // to do
+                true
+            }
+        }
+
+        @SuppressLint("SetTextI18n")
+        fun clearData() {
+            binding.tvTitle.text = "Product Name"
+            binding.tvDesc.text = "Description"
+            binding.tvPrice.text = "0 MMK"
+        }
+
     }
 
 }

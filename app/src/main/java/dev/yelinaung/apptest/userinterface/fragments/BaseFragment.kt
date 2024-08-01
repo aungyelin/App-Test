@@ -9,6 +9,7 @@ import androidx.viewbinding.ViewBinding
 import dev.yelinaung.apptest.R
 import dev.yelinaung.apptest.databinding.FragmentNoTitleBinding
 import dev.yelinaung.apptest.databinding.FragmentWithTitleBinding
+import dev.yelinaung.apptest.helper.NoTitleBar
 import dev.yelinaung.apptest.userinterface.TabsActivity
 import dev.yelinaung.apptest.userinterface.tabs.FirstLevelFragment
 
@@ -30,7 +31,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     ): View? {
         binding = setupViewBinding(inflater, container, savedInstanceState)
 
-        if (this is FirstLevelFragment) {
+        if (this is FirstLevelFragment || this is NoTitleBar) {
             val baseFragmentBinding = FragmentNoTitleBinding.inflate(inflater, container, false)
             baseFragmentBinding.fragmentContainer.removeAllViews()
             baseFragmentBinding.fragmentContainer.addView(binding.root)
