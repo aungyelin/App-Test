@@ -1,5 +1,6 @@
 package dev.yelinaung.apptest.database
 
+import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +16,19 @@ import kotlin.random.Random
 class AddProductFragment : BaseFragment<FragmentAddProductBinding>(), NoTitleBar {
 
     companion object {
-        fun getInstance(): AddProductFragment {
-            return AddProductFragment()
+        private const val PRODUCT = "isEditMode"
+
+        fun getInstance(product: Product? = null): AddProductFragment {
+            val fragment = AddProductFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(PRODUCT, product)
+            fragment.arguments = bundle
+            return fragment
         }
     }
+
+    private var editProduct: Product? = null
+
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
@@ -28,10 +38,31 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>(), NoTitleBar
         return FragmentAddProductBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        editProduct = arguments?.getSerializable(PRODUCT) as? Product
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnInsertProduct.setOnClickListener { addProduct() }
+        this.editProduct?.let {
+            binding.edtProductName.setText(it.name)
+            binding.edtProductDesc.setText(it.description)
+        }
+
+        binding.tvTitle.text = if (editProduct != null) "Update Product" else "Add Product"
+        binding.btnInsertProduct.text = if (editProduct != null) "Update" else "Add"
+
+        binding.btnInsertProduct.setOnClickListener {
+            if (editProduct != null) {
+                updateProduct()
+            } else {
+                addProduct()
+            }
+        }
     }
 
     private fun addProduct() {
@@ -51,9 +82,28 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>(), NoTitleBar
         AsyncTask.execute {
             (requireActivity().application as MyApp).db.productDAO().insert(product)
             requireActivity().runOnUiThread { parentFragmentManager.popBackStackImmediate() }
-            (requireActivity() as? DatabaseActivity)?.getProducts()
+            (requireActivity() as? DatabaseActivity)?.refreshAdapterForNewProduct(product)
         }
 
+    }
+
+    private fun updateProduct() {
+        val name = binding.edtProductName.text.toString()
+        val desc = binding.edtProductDesc.text.toString()
+
+        val product = Product(
+            id = editProduct!!.id,
+            name = name,
+            description = desc,
+            price = editProduct!!.price,
+            brand = editProduct!!.brand
+        )
+
+        AsyncTask.execute {
+            (requireActivity().application as MyApp).db.productDAO().update(product)
+            requireActivity().runOnUiThread { parentFragmentManager.popBackStackImmediate() }
+            (requireActivity() as? DatabaseActivity)?.refreshAdapterForUpdatedProduct(product)
+        }
     }
 
 }

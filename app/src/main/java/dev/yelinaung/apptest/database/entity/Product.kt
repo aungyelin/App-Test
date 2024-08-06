@@ -2,8 +2,8 @@ package dev.yelinaung.apptest.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "product")
 data class Product(
@@ -21,4 +21,4 @@ data class Product(
 
     @ColumnInfo(name = "brand")
     val brand: String,
-)
+): Serializable

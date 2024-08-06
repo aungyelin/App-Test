@@ -67,22 +67,49 @@ class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun getProducts() {
-        AsyncTask.execute { // Insert Data
+    private fun getProducts() {
+        AsyncTask.execute {
             val products = this.db.productDAO().getAllProducts()
             runOnUiThread {
-                adapter.items = products
+                adapter.setNewData(products)
                 adapter.notifyDataSetChanged()
             }
         }
     }
 
+    private fun deleteProduct(product: Product) {
+        AsyncTask.execute {
+            this.db.productDAO().delete(product)
+            runOnUiThread {
+                adapter.removeItem(product)
+                showToast("Product deleted")
+            }
+        }
+    }
+
+    fun refreshAdapterForNewProduct(product: Product) {
+        runOnUiThread {
+            adapter.addItem(product)
+            showToast("Product added")
+        }
+    }
+
+    fun refreshAdapterForUpdatedProduct(product: Product) {
+        runOnUiThread {
+            adapter.updateItem(product)
+            showToast("Product updated")
+        }
+    }
+
     private fun onClickEdit(product: Product) {
-        showToast("Clicked Edit for ${product.name}")
+        showDialogFragment(
+            AddProductFragment.getInstance(product),
+            animation = ScreenAnimation.ENTER_UP_EXIT_STAY
+        )
     }
 
     private fun onClickDelete(product: Product) {
-        showToast("Clicked Delete for ${product.name}")
+        this.deleteProduct(product)
     }
 
     private class MyAdapter(
@@ -90,7 +117,7 @@ class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
         private val onClickDelete: (Product) -> Unit
     ) : RecyclerView.Adapter<MyViewHolder>() {
 
-        var items = listOf<Product>()
+        private var items = arrayListOf<Product>()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             return MyViewHolder(
@@ -110,6 +137,32 @@ class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             holder.setupData(items[position])
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        fun setNewData(products: List<Product>) {
+            items.clear()
+            items.addAll(products)
+            notifyDataSetChanged()
+        }
+
+        fun addItem(product: Product) {
+            items.add(product)
+            notifyItemInserted(items.lastIndex)
+        }
+
+        fun removeItem(product: Product) {
+            val position = items.indexOf(product)
+            items.remove(product)
+            notifyItemRemoved(position)
+        }
+
+        fun updateItem(product: Product) {
+            val position = items.indexOfFirst { item ->
+                item.id == product.id
+            }
+            items[position] = product
+            notifyItemChanged(position)
         }
 
     }
