@@ -69,7 +69,7 @@ class DatabaseActivity : BaseActivity<ActivityDatabaseBinding>() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getProducts() {
         AsyncTask.execute {
-            val products = this.db.productDAO().getAllProducts()
+            val products = this.db.productDAO().getProductsByMaxPrice(price = 1000.0)
             runOnUiThread {
                 adapter.setNewData(products)
                 adapter.notifyDataSetChanged()
