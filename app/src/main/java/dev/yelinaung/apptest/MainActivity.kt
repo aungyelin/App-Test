@@ -2,6 +2,7 @@ package dev.yelinaung.apptest
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import dev.yelinaung.apptest.api.NetworkActivity
 import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.database.DatabaseActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
@@ -56,6 +57,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnDatabase.setOnClickListener {
             this.goToDatabaseActivity()
         }
+
+        binding.btnNetworking.setOnClickListener {
+            this.goToNetworkActivity()
+        }
     }
 
     private fun goToLifecycleScreen() {
@@ -95,6 +100,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToDatabaseActivity() {
         val intent = DatabaseActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToNetworkActivity() {
+        val intent = NetworkActivity.getInstance(this)
         startActivity(intent)
     }
 

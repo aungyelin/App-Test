@@ -8,6 +8,7 @@
     <string name="user_interface">User Interface</string>
     <string name="resources">Resources</string>
     <string name="database">Database</string>
+    <string name="networking">Networking</string>
     <string name="share_preference">Share Preference</string>
 
     <string name="button_next">Next</string>
