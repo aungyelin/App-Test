@@ -69,11 +69,24 @@ class BroadcastActivity : BaseActivity<ActivityBroadcastBinding>() {
     }
 
     class AirplaneModeReceiver : BroadcastReceiver() {
+
+        interface AirplaneModeListener {
+            fun onAirplaneModeChanged(isAirplaneModeOn: Boolean)
+        }
+
+        companion object {
+            var listeners: ArrayList<AirplaneModeListener> = ArrayList()
+        }
+
         @SuppressLint("UnsafeProtectedBroadcastReceiver")
         override fun onReceive(p0: Context?, p1: Intent?) {
             Log.d("TAG", "AirplaneModeReceiver Received")
             p1?.let { intent ->
-                Log.d("TAG", "Is Airplane Mode On = ${intent.getBooleanExtra("state", false)}")
+                val isAirplaneModeOn = intent.getBooleanExtra("state", false)
+                listeners.forEach {
+                    it.onAirplaneModeChanged(isAirplaneModeOn)
+                }
+                Log.d("TAG", "Is Airplane Mode On = $isAirplaneModeOn")
             }
         }
 

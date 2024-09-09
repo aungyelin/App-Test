@@ -6,19 +6,13 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.gson.Gson
 import dev.yelinaung.apptest.BaseActivity
-import dev.yelinaung.apptest.R
-import dev.yelinaung.apptest.api.model.MoviePage
-import dev.yelinaung.apptest.database.DatabaseActivity
+import dev.yelinaung.apptest.api.model.Api
 import dev.yelinaung.apptest.databinding.ActivityNetworkBinding
-import dev.yelinaung.apptest.helper.showToast
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
 
@@ -30,6 +24,8 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
 
     }
 
+    private lateinit var apiService: ApiService
+
     override val pageTitle: String = "Networking"
 
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityNetworkBinding {
@@ -40,13 +36,14 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        apiService = Api.createApiService()
         binding.swipeRefreshLayout.setOnRefreshListener {
             this.fetchMovies()
         }
     }
 
     private fun fetchMovies() {
-        val client = OkHttpClient()
+        /*val client = OkHttpClient()
 
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/discover/movie?language=en-US&page=1")
@@ -80,6 +77,10 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
                     showToast("Movie Count = ${it.results.count()}")
                 }
             }
+        }*/
+
+        AsyncTask.execute {
+            val response = apiService.getMovies()
         }
     }
 

@@ -6,8 +6,10 @@ import dev.yelinaung.apptest.api.NetworkActivity
 import dev.yelinaung.apptest.broadcast.BroadcastActivity
 import dev.yelinaung.apptest.database.DatabaseActivity
 import dev.yelinaung.apptest.databinding.ActivityMainBinding
+import dev.yelinaung.apptest.di.hilt.HiltActivity
 import dev.yelinaung.apptest.intent.IntentActivity
 import dev.yelinaung.apptest.lifecycle.LifecycleActivity
+import dev.yelinaung.apptest.observer.ObserverActivity
 import dev.yelinaung.apptest.resources.ResourcesActivity
 import dev.yelinaung.apptest.sharepreference.SharePreferenceActivity
 import dev.yelinaung.apptest.taskandbackstack.TaskAndBackStackActivity
@@ -61,6 +63,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.btnNetworking.setOnClickListener {
             this.goToNetworkActivity()
         }
+
+        binding.btnHilt.setOnClickListener {
+            this.goToHiltActivity()
+        }
+
+        binding.btnObserver.setOnClickListener {
+            this.goToObserverActivity()
+        }
+
     }
 
     private fun goToLifecycleScreen() {
@@ -105,6 +116,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun goToNetworkActivity() {
         val intent = NetworkActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToHiltActivity() {
+        val intent = HiltActivity.getInstance(this)
+        startActivity(intent)
+    }
+
+    private fun goToObserverActivity() {
+        val intent = ObserverActivity.getInstance(this)
         startActivity(intent)
     }
 
