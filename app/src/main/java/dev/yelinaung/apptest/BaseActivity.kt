@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import dev.yelinaung.apptest.helper.AirplaneModeChange
 import dev.yelinaung.apptest.helper.ScreenChange
 import dev.yelinaung.apptest.helper.showToast
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -20,6 +21,8 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     abstract val pageTitle: String
 
     abstract fun setupViewBinding(layoutInflater: LayoutInflater): VB
+
+    val disposable by lazy { CompositeDisposable() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
+        disposable.clear()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

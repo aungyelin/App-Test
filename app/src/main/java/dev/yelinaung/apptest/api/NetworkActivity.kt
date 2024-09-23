@@ -7,12 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import dev.yelinaung.apptest.BaseActivity
-import dev.yelinaung.apptest.api.model.Api
 import dev.yelinaung.apptest.databinding.ActivityNetworkBinding
+import dev.yelinaung.apptest.helper.showToast
+import dev.yelinaung.apptest.viewmodel.MyVM
+import io.reactivex.rxjava3.kotlin.addTo
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
 
@@ -24,26 +25,46 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
 
     }
 
-    private lateinit var apiService: ApiService
-
     override val pageTitle: String = "Networking"
 
     override fun setupViewBinding(layoutInflater: LayoutInflater): ActivityNetworkBinding {
         return ActivityNetworkBinding.inflate(layoutInflater)
     }
 
+    private val myVM: MyVM by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        apiService = Api.createApiService()
+        this.fetchMovies()
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             this.fetchMovies()
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        myVM.movieSubject.subscribe({
+            binding.swipeRefreshLayout.isRefreshing = false
+            showToast("Movie Count = ${it.results.count()}")
+        }, Throwable::printStackTrace).addTo(disposable)
+
+        myVM.movieData.observe(this) {
+            binding.swipeRefreshLayout.isRefreshing = false
+            showToast("Movie Count = ${it.results.count()}")
+        }
+    }
+
     private fun fetchMovies() {
-        /*val client = OkHttpClient()
+        binding.swipeRefreshLayout.isRefreshing = false
+        this.myVM.fetchMovies()
+    }
+
+    /*private fun fetchMovies() {
+        val client = OkHttpClient()
 
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/discover/movie?language=en-US&page=1")
@@ -77,22 +98,17 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
                     showToast("Movie Count = ${it.results.count()}")
                 }
             }
-        }*/
-
-        AsyncTask.execute {
-            val response = apiService.getMovies()
         }
-    }
+    }*/
 
     private fun testAuthentication() {
         val client = OkHttpClient()
 
-        val request = Request.Builder()
-            .url("https://api.themoviedb.org/3/authentication")
-            .get()
-            .addHeader("accept", "application/json")
-            .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MGIzMjBhMjk2MmEyODEyYzM2ZDFmNGJmZWU2Y2IyNSIsIm5iZiI6MTcyNDE1Mzg3Ny42MTcwODgsInN1YiI6IjYxODVmYWZiZDQ4Y2VlMDA2MmQyZTQ5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1OF4x9sf6p6gEzChm2xvSLd2_yi-osVt6dVqMz0PQYU")
-            .build()
+        val request = Request.Builder().url("https://api.themoviedb.org/3/authentication").get()
+            .addHeader("accept", "application/json").addHeader(
+                "Authorization",
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MGIzMjBhMjk2MmEyODEyYzM2ZDFmNGJmZWU2Y2IyNSIsIm5iZiI6MTcyNDE1Mzg3Ny42MTcwODgsInN1YiI6IjYxODVmYWZiZDQ4Y2VlMDA2MmQyZTQ5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1OF4x9sf6p6gEzChm2xvSLd2_yi-osVt6dVqMz0PQYU"
+            ).build()
 
         AsyncTask.execute {
             val response = client.newCall(request).execute()
