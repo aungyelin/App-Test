@@ -11,6 +11,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityBroadcastBinding
+import dev.yelinaung.apptest.helper.AirplaneModeChange
+import org.greenrobot.eventbus.EventBus
 
 class BroadcastActivity : BaseActivity<ActivityBroadcastBinding>() {
 
@@ -86,6 +88,7 @@ class BroadcastActivity : BaseActivity<ActivityBroadcastBinding>() {
                 listeners.forEach {
                     it.onAirplaneModeChanged(isAirplaneModeOn)
                 }
+                EventBus.getDefault().post(AirplaneModeChange())
                 Log.d("TAG", "Is Airplane Mode On = $isAirplaneModeOn")
             }
         }

@@ -7,15 +7,29 @@ import dagger.hilt.android.HiltAndroidApp
 import dev.yelinaung.apptest.database.DatabaseConfigs
 import dev.yelinaung.apptest.database.MyDatabase
 import dev.yelinaung.apptest.database.migration.Migration1to2
+import dev.yelinaung.apptest.di.koin.appModule
+import dev.yelinaung.apptest.di.koin.networkModule
+import dev.yelinaung.apptest.di.koin.repoModule
+import dev.yelinaung.apptest.di.koin.vmModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.component.KoinComponent
+import org.koin.core.context.startKoin
 
 @HiltAndroidApp
-class MyApp : Application() {
+class MyApp : Application(), KoinComponent {
 
     lateinit var db: MyDatabase
 
 
     override fun onCreate() {
         super.onCreate()
+
+        startKoin {
+            androidLogger()
+            androidContext(this@MyApp)
+            modules(appModule, networkModule, repoModule, vmModule)
+        }
 
         this.initDatabase()
     }
