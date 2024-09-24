@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import dev.yelinaung.apptest.api.ApiService
 import dev.yelinaung.apptest.api.model.MoviePage
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 
 class MyVM(private val apiService: ApiService) : BaseVM() {
 
@@ -56,15 +58,11 @@ class MyVM(private val apiService: ApiService) : BaseVM() {
             .subscribe()
     }
 
-    fun fetchMovies() {
-        apiService.getMovies()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _movieData.value = it
-                movieSubject.onNext(it)
-            }, Throwable::printStackTrace)
-            .addTo(disposable)
+    fun fetchMovies(): Completable {
+        return Single.timer(5, TimeUnit.SECONDS)
+            .flatMap { apiService.getMovies() }
+            .doOnSuccess { movieSubject.onNext(it) }
+            .ignoreElement()
     }
 
 }

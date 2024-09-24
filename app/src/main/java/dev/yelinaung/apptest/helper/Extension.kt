@@ -4,6 +4,8 @@ import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import io.reactivex.rxjava3.core.Completable
 
 fun AppCompatActivity.showDialogFragment(
     fragment: Fragment,
@@ -29,4 +31,12 @@ fun AppCompatActivity.showDialogFragment(
 
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+
+fun Completable.attachProgress(progressView: SwipeRefreshLayout): Completable {
+    return this
+        .doOnSubscribe { progressView.isRefreshing = true }
+        .doOnComplete { progressView.isRefreshing = false }
+        .doOnError { progressView.isRefreshing = false }
+        .doOnTerminate { progressView.isRefreshing = false }
 }

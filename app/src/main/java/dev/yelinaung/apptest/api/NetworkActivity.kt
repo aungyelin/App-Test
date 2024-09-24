@@ -8,9 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import dev.yelinaung.apptest.BaseActivity
 import dev.yelinaung.apptest.databinding.ActivityNetworkBinding
+import dev.yelinaung.apptest.helper.attachProgress
 import dev.yelinaung.apptest.helper.showToast
 import dev.yelinaung.apptest.viewmodel.MyVM
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,20 +50,22 @@ class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
     override fun onStart() {
         super.onStart()
 
-        myVM.movieSubject.subscribe({
-            binding.swipeRefreshLayout.isRefreshing = false
-            showToast("Movie Count = ${it.results.count()}")
-        }, Throwable::printStackTrace).addTo(disposable)
-
-        myVM.movieData.observe(this) {
-            binding.swipeRefreshLayout.isRefreshing = false
-            showToast("Movie Count = ${it.results.count()}")
-        }
+        myVM.movieSubject
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { showToast("Movie Count = ${it.results.count()}") },
+                Throwable::printStackTrace
+            )
+            .addTo(disposable)
     }
 
     private fun fetchMovies() {
-        binding.swipeRefreshLayout.isRefreshing = false
         this.myVM.fetchMovies()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .attachProgress(binding.swipeRefreshLayout)
+            .subscribe()
+            .addTo(disposable)
     }
 
     /*private fun fetchMovies() {
